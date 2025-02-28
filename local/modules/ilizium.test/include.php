@@ -54,10 +54,10 @@ function iliziumUpdateChatInfoAgent()
                         "UF_CHAT_ID" => $chatId,
                         "UF_CHAT_AUTHOR" => $chatAuthor,
                         "UF_FIRST_MESSAGE" => $first['text'],
-                        "UF_FIRST_MESSAGE_TIME" => new \Bitrix\Main\Type\DateTime($first['time']),
+                        "UF_FIRST_MESSAGEx_TIME" => new \Bitrix\Main\Type\DateTime($first['time'], 'Y-m-d H:i:s'),
                         "UF_LAST_MESSAGE_AUTHOR" => $last['user_login'],
                         "UF_LAST_MESSAGE" => $last['text'],
-                        "UF_LAST_MESSAGE_TIME" => new \Bitrix\Main\Type\DateTime($last['time']),
+                        "UF_LAST_MESSAGE_TIME" => new \Bitrix\Main\Type\DateTime($last['time'], 'Y-m-d H:i:s'),
                     ];
 
                     // Если запись для данного чата уже существует, обновляем её
