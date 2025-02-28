@@ -297,5 +297,28 @@ class ilizium_test extends CModule
      */
     private function UnInstallHBlock(): void
     {
+        if (CModule::IncludeModule("highloadblock"))
+        {
+            $hlBlockName = 'b_ilizium_chat_info';
+            $hlBlock = HighloadBlockTable::getList([
+                'filter' => ['TABLE_NAME' => $hlBlockName]
+            ])->fetch();
+
+            if ($hlBlock)
+            {
+                $hlBlockId = $hlBlock["ID"];
+
+                // Удаляем все поля хайлоуд-блока
+                $rsUserFields = CUserTypeEntity::GetList([], ['ENTITY_ID' => "HLBLOCK_" . $hlBlockId]);
+                while ($field = $rsUserFields->Fetch())
+                {
+                    $obUserField = new CUserTypeEntity();
+                    $obUserField->Delete($field["ID"]);
+                }
+
+                // Удаляем сам хайлоуд-блок
+                HighloadBlockTable::delete($hlBlockId);
+            }
+        }
     }
 }
